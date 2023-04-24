@@ -17,7 +17,7 @@ class Cuenta:
 
 # Creamos una función para hacer operaciones con las cuentas
 def hacer_operaciones(cuenta, cantidad, num_ops):
-    for i in range(num_ops):
+    for _ in range(num_ops):
         cuenta.hacer_movimiento(cantidad)
         print(f"La cuenta tiene: {cuenta.get_saldo()}")
         
@@ -30,14 +30,16 @@ if __name__ == '__main__':
     num_ops_con_50 = 20
     num_ops_con_20 = 60
 
+# Con el Pool y la función definida antes realizamos las operaciones
     with Pool() as p:
-        p.starmap(hacer_operaciones, [(cuenta, 100, num_ops_con_100)] * 2)
-        p.starmap(hacer_operaciones, [(cuenta, -100, num_ops_con_100)] * 2)
-        p.starmap(hacer_operaciones, [(cuenta, 50, num_ops_con_50)] * 2)
-        p.starmap(hacer_operaciones, [(cuenta, -50, num_ops_con_50)] * 2)
-        p.starmap(hacer_operaciones, [(cuenta, 20, num_ops_con_20)] * 2)
-        p.starmap(hacer_operaciones, [(cuenta, -20, num_ops_con_20)] * 2)
+        p.starmap(hacer_operaciones, [(cuenta, 100, num_ops_con_100)])
+        p.starmap(hacer_operaciones, [(cuenta, 50, num_ops_con_50)])
+        p.starmap(hacer_operaciones, [(cuenta, 20, num_ops_con_20)])
+        p.starmap(hacer_operaciones, [(cuenta, -100, num_ops_con_100)])
+        p.starmap(hacer_operaciones, [(cuenta, -50, num_ops_con_50)])
+        p.starmap(hacer_operaciones, [(cuenta, -20, num_ops_con_20)])
 
+# Comprobamos si ha salido bien la simulación
     if cuenta.es_simulacion_correcta():
         print("La simulación fue correcta")
     else:
