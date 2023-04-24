@@ -1,5 +1,6 @@
 from multiprocessing import Pool
 
+# Creamos la clase cuenta
 class Cuenta:
     def __init__(self, saldo):
         self.saldo = saldo
@@ -14,10 +15,14 @@ class Cuenta:
     def get_saldo(self):
         return self.saldo
 
+# Creamos una función para hacer operaciones con las cuentas
 def hacer_operaciones(cuenta, cantidad, num_ops):
-    for _ in range(num_ops):
+    for i in range(num_ops):
         cuenta.hacer_movimiento(cantidad)
+        print(f"La cuenta tiene: {cuenta.get_saldo()}")
+        
 
+# Creamos el lanzador
 if __name__ == '__main__':
     cuenta = Cuenta(100)
 
